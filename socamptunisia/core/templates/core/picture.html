@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load i18n static %}
+
+{% block title %}{% trans 'Account Settings' %}{% endblock %}
+
+{% block head %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#imagert").click(function(){
+    $(this).hide();
+  });
+});
+</script>
+  <link href="{% static 'css/jquery.Jcrop.min.css' %}" rel="stylesheet">
+  <script src="{% static 'js/jquery.Jcrop.min.js' %}"></script>
+  <script src="{% static 'js/picture.js' %}"></script>
+<style>
+    .image-preview {
+  width: 300px;
+  height: 300px;
+  background-color: #efefef;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+canvas {
+  display: none;
+}
+</style>
+  <script>
+      function readFile(file) {
+  var reader = new FileReader();
+  var type = file.type;
+
+  reader.onload = function (e) {
+    var img = document.createElement('img');
+    img.src = reader.result;
+    preSizeImage(img, type, 300, 300);
+  }
+
+  reader.readAsDataURL(file, type);
+}
+
+function preSizeImage(img, type, MAX_HEIGHT, MAX_WIDTH) {
+  var canvas     = document.createElement('canvas'),
+      ctx        = canvas.getContext('2d'),
+      MAX_WIDTH  = MAX_WIDTH || 150,
+      MAX_HEIGHT = MAX_HEIGHT || 150,
+      width      = img.width,
+      height     = img.height,
+      fileType   = type || "image/*";
+
+  if (width > height) {
+    if (width > MAX_WIDTH) {
+      height *= MAX_WIDTH / width;
+      width = MAX_WIDTH;
+    }
+  } else {
+    if (height > MAX_HEIGHT) {
+      width *= MAX_HEIGHT / height;
+      height = MAX_HEIGHT;
+    }
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(img, 0, 0, width, height);
+
+  var dataURL = canvas.toDataURL(fileType);
+  localStorage.clear();
+  localStorage.setItem('image:preview', dataURL);
+  previewImage(dataURL, '.image-preview');
+}
+
+function previewImage(dataURL, selector) {
+  var backgroundImage = 'url(' + dataURL + ')';
+  $(selector).css('background-image', backgroundImage);
+}
+
+$('#file-input').on('change', function () {
+  var file = this.files[0];
+  readFile(file);
+});
+  </script>
+{% endblock head %}
+
+{% block main %}
+  <div class="page-header">
+    <h1>{% trans 'Account Settings' %}</h1>
+  </div>
+  <div class="row" style="margin-top: 2em">
+    <div class="col-md-3">
+      {% include 'core/partial_settings_menu.html' with active='picture' %}
+    </div>
+    <div class="col-md-9">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <h3 style="margin-top: 0">{% trans 'Change Picture' %}</h3>
+      <img src="{{ user.profile.get_picture }}" style="width: 150px; border-radius: 5px; margin-bottom: 1em;">
+      <div class="image-preview"></div>
+      <form enctype="multipart/form-data" method="post" action="{% url 'upload_picture' %}" id="picture-upload-form">
+        {% csrf_token %}
+        <input type="file" id="file-input" name="picture" style="display: none">
+
+       <!-- <input type="file" name="picture" > -->
+        <button type="button" class="btn btn-default" id="btn-upload-picture">{% trans 'Upload new picture' %}</button>
+      </form>
+
+      {% if uploaded_picture %}
+        <form method="post" action="{% url 'save_uploaded_picture' %}">
+          {% csrf_token %}
+          <div class="modal fade" id="modal-upload-picture">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">{% trans 'Crop Picture' %}</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="selected-picture">
+                    <p>{% trans 'Crop the profile picture and then click on the' %} <strong>{% trans 'Save Picture' %}</strong> {% trans 'button' %}</p>
+                    <img src="{% get_media_prefix %}profile_pictures/{{ user.username }}_tmp.jpg?_={% now 'U' %}" id="crop-picture">
+                    <input type="hidden" id="x" name="x" />
+                    <input type="hidden" id="y" name="y" />
+                    <input type="hidden" id="w" name="w" />
+                    <input type="hidden" id="h" name="h" />
+                  </div>
+                  <script type="text/javascript">
+                    $(function () {
+                      $("#modal-upload-picture").modal();
+                      window.history.pushState("", "", "/settings/picture/");
+                    });
+                  </script>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+                  <button type="submit" class="btn btn-primary">{% trans 'Save changes' %}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      {% endif %}
+    </div>
+  </div>
+  <div class="container">
+  <h2>Show Collapsible Content By Default</h2>
+  <p>Add the show class next to the collapse class to show the content by default.</p>
+  <p>Click on the button to toggle between showing and hiding content.</p>
+  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
+  <div id="demo" class="collapse show">
+
+  </div>
+</div>
+{% endblock main %}

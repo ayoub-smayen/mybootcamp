@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>gamecraft</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://minecraft--duck132912.repl.co/minecraft.css" />
+	<link rel="shortcut icon" href="https://minecraft--duck132912.repl.co/icon.png"
+	 type="image/x-icon" />
+	<link rel="icon" href="https://minecraft--duck132912.repl.co/icon.png"
+	 type="image/x-icon" />
+	 
+	 <style>
+	     @font-face {
+	font-family: Minecraft;
+	src: url("https://minecraft--duck132912.repl.co/minecraft.ttf");
+}
+html {
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	background: #303030 url("minecraft.jpg") repeat-x 0 0;
+	background-size: cover;
+	animation: MinecraftBackground 165s linear infinite;
+	text-align: center;
+	font-family: Minecraft;
+	text-shadow: 0.2vw 0.2vw 0 #383838;
+	min-height: 100%;
+}
+main {
+	padding: 8% 30% 0 30%;
+}
+img, main, div {
+	image-rendering: pixelated;
+}
+a {
+	color: #fff;
+	text-decoration: none;
+}
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-size: 1.2vw;
+	color: white;
+	margin-bottom: 0.4vw;
+}
+#logo {
+	margin-top: 5%;
+	width: 50%;
+}
+/* TODO: Make the flashing text scale down as more text is added */
+#flashingtext {
+	margin: -3.5% 0 0 47%;
+	width: 40%;
+	transform: rotate(-20deg);
+	animation: FlashingText 0.5s ease-in-out infinite;
+	color: #FFFF00;
+	font-size: 2vw;
+}
+.button {
+	/* padding: 0.2% 50vw; */
+	padding: 1% 0 3% 0;
+	margin: 0 auto 2% auto;
+	background: #7D7D7D url("buttons.png") no-repeat center;
+	background-size: 100% 300%;
+	color: #E0E0E0;
+	font-size: 1.2vw;
+	outline: 0.2vw solid #000;
+	outline-offset: -0.2vw;
+}
+.button_small {
+	width: 49%;
+	display: inline-block;
+	margin-top: 5%;
+}
+.button:hover {
+	background: #7079AA url("buttons.png") no-repeat bottom;
+	background-size: 100% 300%;
+	color: #FFFFA0;
+}
+.button:disabled, .button[disabled] {
+	background: #272727 url("buttons.png") no-repeat top;
+	background-size: 100% 300%;
+	color: #A9A9A9;
+}
+.button span {
+	vertical-align: middle;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.bold {
+	font-weight: bold;
+}
+footer .right {
+	margin-right: 10px;
+}
+ @keyframes FlashingText {
+ 0% {
+ transform: scale(1) rotate(-20deg);
+}
+ 50% {
+ transform: scale(1.05) rotate(-20deg);
+}
+ 100% {
+ transform: scale(1) rotate(-20deg);
+}
+}
+ @keyframes MinecraftBackground {
+ 0% {
+background-position: 0 0;
+}
+ 100% {
+background-position: -4096px 0;
+}
+}
+button {
+  font-family: Minecraft;
+	src: url("https://minecraft--duck132912.repl.co/minecraft.ttf");
+}
+	 </style>
+</head>
+
+<body translate="no" onpageshow="updateidea();">
+		<script src="https://minecraft--duck132912.repl.co/script.js">
+		</script>
+		<link rel="stylesheet" type="text/css" href="https://minecraft--duck132912.repl.co/style.css">
+		<img alt="Minecraft" id="logo" src="https://minecraft--duck132912.repl.co/minecraft.svg"/>
+<div id="flashingtext">Bees! bees! bees!</div>
+<main>
+<button class="button" onclick="play()">Singleplayer</button>
+<br>
+<button class="button" onclick="playmulti()" id="playmulti">Multiplayer</button> <br>
+<button class="button" onclick="alert('Thanks to classic.minecraft.net for the game part')">Credits</button>
+<button class="button" onclick="how()">How to play</button>
+<audio id="audio">
+  <source src="minecraft.mp4">
+</audio>
+<button id="button" class="button">Play audio</button>
+<button class="button button_small left" onclick="change()">Options</button>
+<button class="button button_small right" onclick="quit();">Quit Game</button>
+<script src="https://minecraft--duck132912.repl.co/minecraft.js"></script>
+<script type="text/javascript">
+function updateidea() {
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+  else if (Notification.permission === "granted") {
+    var notification = new Notification("updates? chat--duck132912.repl.co I am duck1321912");
+  }
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        var notification = new Notification("updates? chat--duck132912.repl.co I am duck1321912");
+      }
+    });
+  }
+}Notification.requestPermission().then(function(result) {
+  console.log(result);
+});function spawnNotification(body, icon, title) {
+  var options = {
+      body: body,
+      icon: icon
+  };
+}
+var button = document.getElementById("button");
+var audio = document.getElementById("audio");
+button.addEventListener("click", function(){
+  if(audio.paused){
+    audio.play();
+    button.innerHTML = "Pause audio";
+  } else {
+    audio.pause();
+    button.innerHTML = "Play audio";
+}
+});
+</script>
+</main>
+</body>
+</html>

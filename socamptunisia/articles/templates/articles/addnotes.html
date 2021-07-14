@@ -1,0 +1,514 @@
+{% extends "base.html"%}
+{% load static %}
+{% block head%}
+<link href="{% static 'css/articles.css' %}" rel="stylesheet">
+<!--<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>-->
+<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+  <script src="{% static 'js/articles.js' %}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+
+  </script>
+
+
+   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js">
+
+  </script>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
+
+  </script>
+
+   <script src="https://unpkg.com/react@15/dist/react.js">
+
+  </script>
+
+
+   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js">
+
+  </script>
+
+  <style>
+      @import url('https://fonts.googleapis.com/css?family=Nunito|Ranga');
+$main-color: #F68040;
+$second-color: #E9A553;
+$third-color: #D7B377;
+$text-color: #8F754F;
+$note-back: #FFF6A7;
+
+body{
+  font-family:'Nunito', serif;
+}
+
+.header, .footer {
+  background-color: $main-color;
+  color:#fff;
+  font-family: 'Ranga', cursive;
+}
+
+.header {
+  height: 50px;
+  padding: 5px 0 0 10px;
+  margin-bottom: 2vh;
+}
+
+.footer {
+  height: 40px;
+  padding: 5px 0 0 10px;
+  margin-top: 3vh;
+  .about {
+    margin: 5px auto 0;
+  }
+}
+
+.btn-warning {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 3em;
+  line-height: 0.80;
+  display:block;
+  border: 1px solid #ffff;
+  border-radius: 50%;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+form {
+  width: 50%;
+  border: 1px solid $second-color;
+  margin: 2vh auto 2vh;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: $third-color;
+  color: $text-color;
+  font-family: 'Nunito', sans-serif;
+  textarea {
+    width:100%;
+    overflow: auto;
+    border-radius: 5px;
+    outline: 0 none;
+  }
+  button {
+    width: 75px;
+    height:35px;
+    text-align: center;
+    border: 0px solid $second-color;
+    color: #FFF;
+    background-color: $second-color;
+    border-radius: 2px;
+    margin-right: 10px;
+    text-decoration:none;
+    transition: background .15s ease-in, transform .25s ease-in-out;
+  }
+  @media screen and (max-width: 580px) {
+     width: 95%;
+  }
+}
+
+button:active, button:hover, button:focus  {
+  outline:0;
+  cursor: pointer;
+  background: rgba(255,142,69,0.5);
+  transform: scale(1.07);
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    border-color: rgba(229, 103, 23, 0.8);
+    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+    outline: 0 none;
+}
+
+.note {
+  display: inline-block;
+  background-color: transparent;
+  padding: 5px;
+  font-family: 'Nunito', sans-serif;
+  .inner {
+    background-color: $note-back;
+    padding: 5px;
+    border-radius: 5px;
+    height: 230px;
+    color: $text-color;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .title {
+    background-color: #FFF275;
+    padding: 1px;
+    height: 45px;
+    h2 {
+      display: inline-block;
+    }
+  }
+  .btn {
+      background-color: #58A33A;
+      color: #FFF;
+      margin: 1px 0px 1px 5px;
+      float: right;
+    }
+  .del {
+    background-color: #DD4B1A;
+  }
+  .save {
+    background-color: $second-color;
+  }
+  input, textarea {
+    margin: 1px;
+    width: 100%;
+    border-radius: 5px;
+  }
+  span {
+    padding-left: 15px;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+
+body {
+  font-family: PT Sans;
+}
+
+#list img {
+  max-width: 300px;
+}
+
+#deleteImgs {
+  display: none;
+}
+  </style>
+{% endblock%}
+
+
+{% block main%}
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="jumbotron">
+    <div class="container">
+        <div id="app"></div>
+        <p>Select images, they will be stored in your browser and will be displayed even after reload. Selecting big images (&gt; 2MB) can crash your browser.</p>
+<input type="file" id="files">
+
+
+<p id="state">No images stored in your browser.</p>
+<div id="list">
+</div>
+
+<a href="#" id="deleteImgs">Delete Images</a>
+        <br/>
+        <br>
+             <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+<button id="fileSelect">Select some files</button>
+<div id="fileList">
+</div>
+    </div>
+</div>
+
+
+
+<script>
+    window.URL = window.URL || window.webkitURL;
+
+const fileSelect = document.getElementById("fileSelect"),
+    fileElem = document.getElementById("fileElem"),
+    fileList = document.getElementById("fileList");
+
+fileSelect.addEventListener("click", function (e) {
+  if (fileElem) {
+    fileElem.click();
+  }
+  e.preventDefault(); // prevent navigation to "#"
+}, false);
+
+function handleFiles(files) {
+  if (!files.length) {
+    fileList.innerHTML = "<p>No files selected!</p>";
+  } else {
+    fileList.innerHTML = "";
+    const container = document.createElement("div");
+    fileList.appendChild(container);
+    for (let i = 0; i < files.length; i++) {
+      const img = document.createElement("img");
+      img.src = window.URL.createObjectURL(files[i]);
+      img.onload = function() {
+        window.URL.revokeObjectURL(this.src);
+      }
+      container.appendChild(img);
+    }
+  }
+}
+</script>
+<script>
+    class Main extends React.Component {
+   constructor(props) {
+    super(props);
+    this.newNote = this.newNote.bind(this); //when save form
+    this.saveNote = this.saveNote.bind(this); //localStorage & this.state
+    this.removeNote = this.removeNote.bind(this);
+    this.updateNote = this.updateNote.bind(this); //whan clicked save-icon in a note
+
+    this.state = {notes:[]};
+  }
+
+  componentDidMount() {
+    let notes = localStorage.getItem("notes");
+      if (notes)
+         this.setState({notes: JSON.parse(notes)});
+  }
+
+  newNote(title, text) { //prepend new object
+    let notes = [{title: title, text: text}].concat(this.state.notes);
+    this.saveNote(notes);
+  }
+
+  saveNote(notes) {
+    localStorage.setItem('notes', JSON.stringify(notes));
+    this.setState({notes: notes});
+  }
+
+  removeNote(index) {
+    let notes = this.state.notes;
+    notes.splice(index, 1);
+    this.saveNote(notes);
+  }
+
+  updateNote(index, title, text) {
+    let notes = this.state.notes;
+    notes[index].title = title;
+    notes[index].text = text;
+    this.saveNote(notes);
+  }
+
+  render() { //Conditional rendering: Ternary operator shows saved notes from local storage. Or plain text
+   const instruction = <div className="col-xs-12 col-sm-6 offset-sm-3">The app uses local storage to keep changes in the client's cache.
+                         Click orange round button &#x02197; to add a new note. You can edit or delete notes.
+                         If you delete your browser's temporary files then you will lose your notes. </div>
+
+   let notes = this.state.notes.map((obj, i) =>
+               <Note key={i} index={i} title={obj.title} text={obj.text} onUpdate={this.updateNote} onRemove={this.removeNote} />
+               );
+
+    return ( <div className="container-fluid">
+
+              <div className="row header">
+                <h1 className="col-2">Notepad</h1>
+                <div className="col-1 offset-7 offset-md-9">
+                  <button  type="button" className="btn btn-warning" data-toggle="collapse" data-target="#form">+</button>
+                </div>
+              </div>
+
+              <Form onSend={this.newNote}/>
+
+              <div className="container-fluid">
+                  {this.state.notes.length > 0 ? notes : instruction }
+              </div>
+
+              <div className="row footer">
+                <h5 className="about">Made by <a href="https://github.com/vladislavalerievich" target="_blank"> this</a> guy</h5>                           </div>
+          </div>
+    )
+  }
+}
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props);    //controlled component, so it needs so many handlers
+    this.changeTitle = this.changeTitle.bind(this);
+    this.changeText = this.changeText.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+
+    this.state = {title: '', text: ''};
+  }
+
+  changeTitle(e) {
+    this.setState({title: e.target.value});
+  }
+
+  changeText(e) {
+    this.setState({text: e.target.value});
+  }
+
+  handleSubmit(e) { //here is a "Lift state up" on the parent component
+    this.props.onSend(this.state.title, this.state.text);
+    this.handleCancel(e); //reset form text and cancel reload of the page
+  }
+
+  handleCancel(e) {
+    this.setState({title: '', text: ''});
+    e.preventDefault();
+  }
+
+  render() {
+    return ( <form className="collapse" id="form">
+                  <div className="form-group">
+                     <label htmlFor="exampleInputEmail1">Title</label>
+                     <input type="text" value={this.state.title} onChange={this.changeTitle}
+                            className="form-control" placeholder="Enter title" />
+                  </div>
+
+                  <div className="form-group">
+                     <textarea  name="text" value={this.state.text} onChange={this.changeText}
+                                placeholder="Enter message" className="form-control" rows="4"/>
+                  </div>
+
+                  <button onClick={this.handleSubmit} className="btn">Save</button>
+                  <button onClick={this.handleCancel} className="btn">Cancel</button>
+              </form>  )
+  }
+}
+
+class Note extends React.Component {
+  constructor(props) {
+    super(props);
+    this.changeTitle = this.changeTitle.bind(this);
+    this.changeText = this.changeText.bind(this);
+
+    this.edit = this.edit.bind(this); //to the parent
+    this.delete = this.delete.bind(this); //to the parent
+
+    this.state = {title: this.props.title, text: this.props.text, editing: false}; //by default render as text
+  }
+
+  edit() { //lift state up to the parent
+    this.props.onUpdate(this.props.index, this.state.title, this.state.text);
+    this.setState({editing: !this.state.editing});
+  }
+
+  delete() { //lift state up to the parent
+    this.props.onRemove(this.props.index);
+  }
+
+  changeTitle(e) {
+    this.setState({title: e.target.value});
+  }
+
+  changeText(e) {
+    this.setState({text: e.target.value});
+  }
+
+  renderNoteOrEdit() { //when clicks edit button pencil-icon toggle between input and div
+    if(this.state.editing) {
+      return (<div className="inner">
+                <div className="title">
+                     <span>Title</span>
+                     <button type="button" className="btn del" onClick={this.delete}><i className="fa fa-trash"></i></button>
+                     <button type="button" className="btn save" onClick={this.edit}><i className="fa fa-floppy-o"></i></button>
+                </div>
+
+                <div className="form-group">
+                    <input type="text" value={this.state.title} onChange={this.changeTitle} className="form-control" />
+                </div>
+                <div className="form-group">
+                    <textarea  name="text" value={this.state.text} onChange={this.changeText} className="form-control" rows="4"/>
+                </div>
+
+             </div>)
+    } else {
+       return (<div className="inner">
+                 <div className="title">
+                     <h2>{this.props.title}</h2>
+                     <button type="button" className="btn del" onClick={this.delete}><i className="fa fa-trash"></i></button>
+                     <button type="button" className="btn" onClick={this.edit}><i className="fa fa-pencil"></i></button>
+                 </div>
+                 <div className="text">
+                   <p>{this.props.text}</p>
+                 </div>
+               </div>)
+    }
+  }
+  render() { //render function based on value {this.state.editing}
+    return ( <div className="note col-sx-10 col-sm-6 col-md-4">
+                {this.renderNoteOrEdit()}
+             </div>
+    )
+  }
+}
+
+ReactDOM.render(<Main/>, document.getElementById('app'));
+
+
+var imagesObject = [];
+
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = function(e) {
+          displayImgData(e.target.result)
+          addImage(e.target.result);
+      };
+
+      reader.readAsDataURL(f);
+    }
+}
+
+function loadFromLocalStorage(){
+  var images = JSON.parse(localStorage.getItem("images"))
+
+  if(images && images.length > 0){
+    imagesObject = images;
+
+    displayNumberOfImgs();
+    images.forEach(displayImgData);
+  }
+}
+
+function addImage(imgData){
+  imagesObject.push(imgData);
+  displayNumberOfImgs();
+  localStorage.setItem("images", JSON.stringify(imagesObject));
+}
+
+function displayImgData(imgData){
+  var span = document.createElement('span');
+  span.innerHTML = '<img class="thumb" src="' + imgData + '"/>';
+  document.getElementById('list').insertBefore(span, null);
+}
+
+function displayNumberOfImgs(){
+  if(imagesObject.length > 0){
+
+    document.getElementById("state").innerHTML = imagesObject.length + " image" + ((imagesObject.length > 1) ? "s" : "") + " stored in your browser";
+
+    document.getElementById("deleteImgs").style.display = "inline";
+
+  } else {
+    document.getElementById("state").innerHTML = "No images stored in your browser.";
+    document.getElementById("deleteImgs").style.display = "none";
+  }
+
+
+}
+
+function deleteImages(){
+  imagesObject = [];
+  localStorage.removeItem("images");
+  displayNumberOfImgs()
+  document.getElementById('list').innerHTML = "";
+}
+
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+document.getElementById('deleteImgs').addEventListener("click", deleteImages);
+loadFromLocalStorage();
+
+</script>
+{% endblock main %}

@@ -1,0 +1,1021 @@
+<html>
+    <head>
+        <title>piano2</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.7.7/babel.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    @use postcss-nested;
+
+@font-face {
+  font-family: Michroma;
+  src:
+    url(/michroma.woff2) format("woff2"),
+    url(/michroma.woff) format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Tourney;
+  src:
+    url(/tourney.woff2) format("woff2"),
+    url(/tourney.woff) format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Raleway;
+  src:
+    url(/raleway.woff2) format("woff2"),
+    url(/raleway.woff) format("woff");
+  font-display: swap;
+}
+
+:root {
+  --casio-bgcolor: #171e27;
+  --casio-color: #909eb4;
+}
+
+.colorButtons {
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+
+  & button {
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+    border-radius: 5px;
+    border: 2px solid var(--casio-color);
+    background: var(--casio-bgcolor);
+  }
+}
+
+body {
+  transition: background 1s;
+}
+
+body.dark {
+  background: #000;
+  animation: prepareSong 8s ease 8s alternate 3;
+}
+
+.thanos {
+  width: 100px;
+  animation: moveThanos 5s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 25;
+  border-radius: 50%;
+}
+
+@keyframes moveThanos {
+  0%,
+  100% { transform: translate(0, 0); }
+  25% { transform: translate(90vw, 75vh); }
+  50% { transform: translate(90vw, 0); }
+  75% { transform: translate(0, 75vh); }
+}
+
+@keyframes prepareSong {
+  0% { background: #000; }
+  100% { background: #333; }
+}
+
+body.party {
+  background: var(--body-color, #000);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+.casio-pt1 {
+  display: flex;
+  width: 900px;
+  height: 250px;
+  background: var(--casio-bgcolor);
+  border-radius: 4px;
+  font-family: Raleway, Arial, serif;
+  font-weight: 400;
+  font-size: 9px;
+  color: var(--casio-color);
+  padding: 8px 5px 5px 5px;
+  box-shadow:
+    0 2px 1px #fffc inset,
+    1px 1px 0 #0001,
+    1px 1px 0 var(--casio-bgcolor),
+    2px 2px 0 #0003,
+    2px 2px 0 var(--casio-bgcolor),
+    4px 4px 0 #0005,
+    4px 4px 0 var(--casio-bgcolor),
+    6px 6px 0 #0006,
+    6px 6px 0 var(--casio-bgcolor),
+    8px 8px 0 #0007,
+    8px 8px 0 var(--casio-bgcolor),
+    8px 8px 4px #0005;
+
+  & .casio-left {
+    width: 200px;
+    min-width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    & .speaker-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      & .speaker {
+        width: 170px;
+        height: 180px;
+        background:
+          repeating-linear-gradient(to bottom, #0003 0 2px, #0005 2px 3px, transparent 3px 7px),
+          linear-gradient(
+            to right,
+            transparent 0 32%,
+            var(--casio-bgcolor) 32% 35%,
+            transparent 35% 66%,
+            var(--casio-bgcolor) 66% 68%,
+            transparent 68% 100%
+          ),
+          radial-gradient(circle, #0001 65%, transparent 65% 100%);
+      }
+    }
+
+    & .speaker-bottom {
+      width: 100%;
+      height: 50px;
+      display: flex;
+
+      & .power {
+        width: 60px;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & .led {
+          width: 12px;
+          height: 4px;
+          background: #2f1f2a;
+
+          &.on {
+            background: #c01812;
+          }
+        }
+      }
+
+      & .logo {
+        display: flex;
+        width: 100%;
+        align-items: baseline;
+
+        & .brand {
+          font-family: "Michroma", sans-serif;
+          font-weight: bold;
+          font-size: 16px;
+          margin-left: 6px;
+        }
+
+        & .model {
+          font-family: "Tourney", serif;
+          font-weight: normal;
+          font-size: 18px;
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+
+  & .casio-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-right: 8px;
+
+    & .casio-controls {
+      min-height: 80px;
+      border-top: 2px solid var(--casio-color);
+
+      & .controls-label {
+        display: flex;
+        align-items: flex-end;
+        font-size: 9px;
+
+        & .group {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+
+          &.buttons {
+            & .semi.box {
+              border-bottom: 0;
+              border-radius: 2px 2px 0 0;
+              padding: 2px 3px;
+              position: absolute;
+              height: 10px;
+              transform: translate(-28px, -2px);
+            }
+
+            & .options {
+              display: flex;
+              align-items: flex-end;
+            }
+
+            & span:not(.fill)::after {
+              content: "▪";
+              display: block;
+            }
+
+            & .fill {
+              margin: 0 2px;
+              display: flex;
+              justify-content: center;
+              width: 5px;
+              text-align: center;
+            }
+
+            & .arrow {
+              width: 4px;
+              margin: 0 6px;
+            }
+          }
+
+          & .box {
+            display: inline-block;
+            border: 1px solid var(--casio-color);
+            border-radius: 2px;
+            padding: 0 10px;
+            font-size: 10px;
+            margin: 4px;
+
+            &.last {
+              margin-left: 2em;
+            }
+          }
+
+          & .fill {
+            background: var(--casio-color);
+            color: var(--casio-bgcolor);
+          }
+
+          & .options {
+            display: flex;
+
+            & > span {
+              display: inline-block;
+              max-width: 26px;
+              padding: 2px 5px;
+              text-align: center;
+
+              &.inline {
+                max-width: none;
+                width: 42px;
+              }
+            }
+
+            & .volume {
+              clip-path: polygon(0 50%, 100% 15%, 100% 85%, 0 50%);
+            }
+          }
+        }
+
+        & > :nth-child(4) .options {
+          margin-left: 6px;
+
+          & > span { width: 20px; }
+
+          & > span:nth-child(n+7) {
+            transform: translateX(-3px);
+          }
+        }
+      }
+
+      & .controls-buttons {
+        width: 100%;
+        height: 25px;
+        margin: 4px 0;
+
+        & .grid {
+          border: 1px solid #0004;
+          border-bottom-color: #fff4;
+          border-right-color: #fff4;
+          width: 100%;
+          height: 100%;
+          background:
+            linear-gradient(to bottom, var(--casio-bgcolor) 0 15%, transparent 15% 85%, var(--casio-bgcolor) 85% 100%),
+            repeating-linear-gradient(to right, transparent 0 2px, #0004 2px 3px);
+          display: flex;
+          align-items: center;
+
+          & > div {
+            background: var(--casio-bgcolor);
+            padding: 0 6px;
+
+            &:nth-child(1) { margin-left: 32px; }
+            &:nth-child(2) { margin-left: 36px; }
+            &:nth-child(3) { margin-left: 38px; }
+            &:nth-child(4) { margin-left: 36px; }
+            &:nth-child(5) { margin-left: 38px; }
+          }
+
+          & .group {
+            display: flex;
+            justify-content: space-around;
+
+            &.buttons .button {
+              margin: 0 10px;
+            }
+
+            &.end {
+              margin-left: 24px;
+
+              & .big {
+                margin: 0 4px;
+              }
+            }
+          }
+
+          & .button {
+            display: inline-block;
+            border: 0;
+            width: 8px;
+            height: 18px;
+            background: black;
+            box-shadow:
+              1px 1px 2px #0006,
+              1px 0 0 #fff5 inset;
+
+            &:active {
+              box-shadow: 0 0 3px #0005 inset;
+            }
+          }
+
+          & .big.button {
+            width: 26px;
+            background-image:
+              linear-gradient(to top, #44517a 0 20%, transparent 20% 80%, #44517a 80% 100%),
+              repeating-linear-gradient(to top, transparent 0 1px, #0003 1px 2px);
+          }
+
+          & .steelblue { background: #44517a; }
+          & .orange { background: #b34431; }
+          & .gold { background: #b67523; }
+          & .green { background: #398d79; }
+          & .grey { background: #53586b; }
+
+          & .slider {
+            display: flex;
+            align-items: center;
+            height: 18px;
+            border: 1px solid #0004;
+            border-bottom-color: #fff7;
+            border-right-color: #fff7;
+            box-shadow: 2px 2px 2px #0003 inset;
+
+            & input {
+              display: none;
+            }
+
+            & input + label {
+              display: block;
+              width: 12px;
+              height: 8px;
+              background: #000;
+            }
+
+            & input:checked + label {
+              height: 16px;
+              background: transparent;
+              display: flex;
+              position: relative;
+
+              &::before,
+              &::after {
+                content: "";
+                display: block;
+                background: #444;
+                width: 5px;
+                border-radius: 1px;
+                border-right: 1px solid #222;
+                height: 16px;
+                position: absolute;
+              }
+              &::after { right: 0; }
+            }
+          }
+        }
+      }
+    }
+
+    & .keys-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-top: 4px solid var(--casio-color);
+      position: relative;
+
+      & .name-keys {
+        min-height: 15px;
+        display: flex;
+
+        & .key-name {
+          width: 100%;
+          text-align: center;
+          position: relative;
+
+          &[data-rhytm]::before {
+            content: attr(data-rhytm);
+          }
+
+          &:nth-child(9) {
+            &::before {
+              width: 200%;
+              position: absolute;
+              left: -50%;
+            }
+
+            &::after {
+              margin-top: 10px;
+            }
+          }
+
+          &[data-rhytm]::after {
+            content: "|";
+            display: block;
+          }
+        }
+
+        & .instrument-type {
+          font-size: 8px;
+          position: absolute;
+          right: 0;
+        }
+      }
+
+      & .keys {
+        min-height: 135px;
+        position: relative;
+        box-shadow: 0 1px 0 1px #1113;
+
+        & .black-keys {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 73px;
+          display: flex;
+          justify-content: space-evenly;
+
+          & .black.key {
+            grid-area: key;
+            width: 22px;
+            height: 100%;
+            background-color: #111;
+            background-image:
+              linear-gradient(to right, #111 0 2px, transparent 2px),
+              linear-gradient(to left, #111 0 2px, transparent 2px),
+              linear-gradient(to top, transparent 0 3px, #fff8 4px 5px, transparent 8px);
+            border: 1px outset #ccc;
+            border-top: 0;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            position: relative;
+            z-index: 10;
+
+            &:nth-child(2),
+            &:nth-child(4),
+            &:nth-child(7),
+            &:nth-child(9) {
+              margin-right: 28px;
+            }
+
+            &:active,
+            &.active {
+              z-index: 8;
+              background-image:
+                linear-gradient(to right, #111 0 2px, transparent 2px),
+                linear-gradient(to left, #111 0 2px, transparent 2px),
+                linear-gradient(to top, transparent 0 1px, #fff3 2px 3px, transparent 6px);
+            }
+          }
+        }
+
+        & .white-keys {
+          display: flex;
+          height: 100%;
+
+          & .white.key {
+            width: 100%;
+            height: 136px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #ddd;
+            border-top: 0;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 2px 2px #0004;
+
+            &::after {
+              content: "";
+              display: block;
+              background: linear-gradient(to bottom, #0006 0 1px, #0005 2px 10px, transparent 15% 100%);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+            }
+
+            &:active,
+            &.active {
+              transform: translate(2px, 0);
+              z-index: 2;
+              border-top: 2px solid #fff;
+              box-shadow: 0 0 2px #0004;
+
+              &::after {
+                transform: translate(-2px, -2px);
+              }
+            }
+          }
+        }
+      }
+
+      & .note-keys {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        font-size: 8px;
+        justify-content: space-around;
+        transform: translateY(3px);
+        box-shadow: 0 5px 4px #0005 inset;
+        border-right: 1px solid #fff2;
+        border-top: 1px solid #0007;
+        position: relative;
+        top: -2px;
+        left: -1px;
+        padding: 0 1px;
+      }
+    }
+  }
+}
+
+.created {
+  background:
+    url(https://assets.codepen.io/154065/internal/avatars/users/default.png),
+    linear-gradient(to bottom, #884ced, #ec1cce);
+  background-size: 75px 75px, cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 2em;
+
+  & span,
+  & h2,
+  & p,
+  & a {
+    font-family: Montserrat;
+    margin: 0;
+  }
+
+  & a,
+  & p,
+  & span {
+    color: #fff;
+  }
+
+  & h2 {
+    font-weight: 700;
+    transform: translate(0, -4px);
+  }
+
+  & a {
+    text-decoration-color: rgba(255,255,255,0.4);
+  }
+
+  & a:hover {
+    color: #e6e82a;
+  }
+}
+</style>
+    </head>
+
+    <body>
+        <div class="colorButtons">
+    <button class="mode1"></button>
+    <button class="mode2"></button>
+    <button class="mode3"></button>
+    <button class="mode4"></button>
+  </div>
+
+  <div class="container">
+    <div class="casio-pt1">
+      <div class="casio-left">
+        <div class="speaker-container">
+          <div class="speaker"></div>
+        </div>
+        <div class="speaker-bottom">
+          <div class="power">
+            <div class="led on"></div>
+            <span>power</span>
+          </div>
+          <div class="logo">
+            <span class="brand">CASIO</span>
+            <div class="model">PT-1</div>
+          </div>
+        </div>
+      </div>
+      <div class="casio-right">
+        <div class="casio-controls">
+          <div class="controls-label">
+            <div class="group">
+              <div class="box">mode</div>
+              <div class="options">
+                <span class="fill inline">power off</span>
+                <span>record</span>
+                <span>play</span>
+              </div>
+            </div>
+            <div class="group">
+              <div class="box">volume</div>
+              <div class="options">
+                <span>min</span>
+                <span class="volume">||||||||||</span>
+                <span>max</span>
+              </div>
+            </div>
+
+            <div class="group">
+              <div class="box">tone</div>
+              <div class="options">
+                <span>piano</span>
+                <span>fantasy</span>
+                <span>violin</span>
+                <span>flute</span>
+              </div>
+            </div>
+
+            <div class="buttons group">
+              <div class="options">
+                <span>clear</span>
+                <span>del.</span>
+                <span class="arrow fill">▼</span>
+                <span class="arrow fill">▲</span>
+                <span>rhythm select</span>
+                <span>reset</span>
+                <span>demo</span>
+                <span>memory play</span>
+              </div>
+              <div class="semi box">tempo</div>
+            </div>
+
+            <div class="group">
+              <div class="last box">one key play</div>
+            </div>
+          </div>
+          <div class="controls-buttons">
+            <div class="grid">
+              <div class="mode slider">
+                <input id="off" type="radio" name="mode" value="off">
+                <label for="off"></label>
+
+                <input id="record" type="radio" name="mode" value="record">
+                <label for="record"></label>
+
+                <input id="play" type="radio" name="mode" value="play" checked>
+                <label for="play"></label>
+              </div>
+              <div class="volume slider">
+                <input id="v0" type="radio" name="volume" value="0">
+                <label for="v0"></label>
+
+                <input id="v1" type="radio" name="volume" value="0.25">
+                <label for="v1"></label>
+
+                <input id="v2" type="radio" name="volume" value="0.5">
+                <label for="v2"></label>
+
+                <input id="v3" type="radio" name="volume" value="0.75">
+                <label for="v3"></label>
+
+                <input id="v4" type="radio" name="volume" value="1" checked>
+                <label for="v4"></label>
+              </div>
+              <div class="tone slider">
+                <input id="piano" type="radio" name="tone" value="piano" checked>
+                <label for="piano"></label>
+
+                <input id="fantasy" type="radio" name="tone" value="fantasy">
+                <label for="fantasy"></label>
+
+                <input id="violin" type="radio" name="tone" value="violin">
+                <label for="violin"></label>
+
+                <input id="flute" type="radio" name="tone" value="flute">
+                <label for="flute"></label>
+              </div>
+              <div class="buttons group">
+                <div class="button steelblue" data-type="clear"></div>
+                <div class="button orange" data-type="del"></div>
+                <div class="button orange" data-type="down"></div>
+                <div class="button orange" data-type="up"></div>
+                <div class="button orange" data-type="rhythm"></div>
+                <div class="button gold" data-type="reset"></div>
+                <div class="button green" data-type="demo"></div>
+                <div class="button grey" data-type="memory"></div>
+              </div>
+              <div class="end group">
+                <div class="big button steelblue"></div>
+                <div class="big button steelblue"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="keys-container">
+          <div class="name-keys">
+            <div class="key-name"></div>
+            <div class="key-name"></div>
+            <div class="key-name" data-rhytm="march"></div>
+            <div class="key-name" data-rhytm="waltz"></div>
+            <div class="key-name" data-rhytm="4beat"></div>
+            <div class="key-name" data-rhytm="swing"></div>
+            <div class="key-name" data-rhytm="rock1"></div>
+            <div class="key-name" data-rhytm="rock2"></div>
+            <div class="key-name" data-rhytm="bossa nova"></div>
+            <div class="key-name" data-rhytm="samba"></div>
+            <div class="key-name" data-rhytm="rhumba"></div>
+            <div class="key-name" data-rhytm="beguine"></div>
+            <div class="key-name"></div>
+            <div class="key-name"></div>
+            <div class="key-name"></div>
+            <div class="key-name"></div>
+            <div class="key-name"></div>
+            <div class="instrument-type">ELECTRONIC MUSICAL INSTRUMENT</div>
+          </div>
+          <div class="keys">
+            <div class="black-keys">
+              <div class="black key" data-note="G#3"></div>
+              <div class="black key" data-note="A#3"></div>
+              <div class="black key" data-note="C#4"></div>
+              <div class="black key" data-note="D#4"></div>
+              <div class="black key" data-note="F#4"></div>
+              <div class="black key" data-note="G#4"></div>
+              <div class="black key" data-note="A#4"></div>
+              <div class="black key" data-note="C#5"></div>
+              <div class="black key" data-note="D#5"></div>
+              <div class="black key" data-note="F#5"></div>
+              <div class="black key" data-note="G#5"></div>
+              <div class="black key" data-note="A#5"></div>
+            </div>
+            <div class="white-keys">
+              <div class="white key" data-note="G3"></div>
+              <div class="white key" data-note="A3"></div>
+              <div class="white key" data-note="B3"></div>
+              <div class="white key" data-note="C4"></div>
+              <div class="white key" data-note="D4"></div>
+              <div class="white key" data-note="E4"></div>
+              <div class="white key" data-note="F4"></div>
+              <div class="white key" data-note="G4"></div>
+              <div class="white key" data-note="A4"></div>
+              <div class="white key" data-note="B4"></div>
+              <div class="white key" data-note="C5"></div>
+              <div class="white key" data-note="D5"></div>
+              <div class="white key" data-note="E5"></div>
+              <div class="white key" data-note="F5"></div>
+              <div class="white key" data-note="G5"></div>
+              <div class="white key" data-note="A5"></div>
+              <div class="white key" data-note="B5"></div>
+            </div>
+          </div>
+          <div class="note-keys">
+            <div class="note">G</div>
+            <div class="note">A</div>
+            <div class="note">B</div>
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+            <div class="note">F</div>
+            <div class="note">G</div>
+            <div class="note">A</div>
+            <div class="note">B</div>
+            <div class="note">C</div>
+            <div class="note">D</div>
+            <div class="note">E</div>
+            <div class="note">F</div>
+            <div class="note">G</div>
+            <div class="note">A</div>
+            <div class="note">B</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="created">
+  <span>Created by</span>
+  <a href="http://appchat258.pythonanywhere.com/"><h2>socialboottuni</h2></a>
+  <p>on</p>
+</div>
+
+
+<script>
+    import Soundfont from "https://cdn.skypack.dev/soundfont-player";
+
+const NOTES = {
+  "keyz": "G3",
+  "keyx": "A3",
+  "keyc": "B3",
+  "keyv": "C4",
+  "keyb": "D4",
+  "keyn": "E4",
+  "keym": "F4",
+  "keyq": "G4",
+  "keyw": "A4",
+  "keye": "B4",
+  "keyr": "C5",
+  "keyt": "D5",
+  "keyy": "E5",
+  "keyu": "F5",
+  "keyi": "G5",
+  "keyo": "A5",
+  "keyp": "B5",
+  "keys": "G#3",
+  "keyd": "A#3",
+  "keyg": "C#4",
+  "keyh": "D#4",
+  "keyk": "F#4",
+  "keyl": "G#4",
+  "keyñ": "A#4",
+  "key5": "C#5",
+  "key6": "D#5",
+  "key8": "F#5",
+  "key9": "G#5",
+  "key0": "A#5"
+};
+
+const ac = new AudioContext();
+const options = { soundfont: "FluidR3_GM" };
+const cumbiaSong = new Audio("https://manzdev.github.io/twitch-casio-pt1/cumbia.mp3");
+cumbiaSong.volume = 0.45;
+const playingNotes = {};
+let currentInstrument = "piano";
+let currentVolume = 1;
+let thanosMode = false;
+
+const COLORMODES = [
+  { bgcolor: "#171e27", color: "#909eb4" },
+  { bgcolor: "#c0beaf", color: "#4d1210" },
+  { bgcolor: "#c02628", color: "#e17d75" },
+  { bgcolor: "#becedd", color: "#6b799e" },
+];
+
+const colorsButtons = document.querySelectorAll(".colorButtons button");
+colorsButtons.forEach((button, index) => {
+  button.style.setProperty("--casio-bgcolor", COLORMODES[index].bgcolor);
+  button.style.setProperty("--casio-color", COLORMODES[index].color);
+  button.addEventListener("click", () => {
+    document.body.style.setProperty("--casio-bgcolor", COLORMODES[index].bgcolor);
+    document.body.style.setProperty("--casio-color", COLORMODES[index].color);
+  });
+});
+
+const instruments = {
+  piano: "acoustic_grand_piano",
+  fantasy: "lead_2_sawtooth",
+  violin: "violin",
+  flute: "flute"
+};
+
+for (const pair of Object.entries(instruments)) {
+  const [key, value] = pair;
+  Soundfont.instrument(ac, value, options)
+    .then(data => { instruments[key] = data; });
+}
+
+const play = (instrument, note, duration = 6) => {
+  playingNotes[note] = instruments[instrument].start(note, ac.currentTime, { duration, gain: currentVolume });
+};
+
+const stop = (note) => {
+  const playingNote = playingNotes[note];
+  playingNote.stop();
+  playingNotes[note] = null;
+};
+
+const pianoKeys = document.querySelectorAll(".key");
+pianoKeys.forEach(key => {
+  const note = key.dataset.note;
+  key.addEventListener("mousedown", () => play(currentInstrument, note));
+  key.addEventListener("mouseleave", () => playingNotes[note] && stop(note));
+  key.addEventListener("mouseup", () => playingNotes[note] && stop(note));
+});
+
+document.addEventListener("keydown", (ev) => {
+  const id = `key${ev.key}`;
+  const note = NOTES[id];
+  if (!playingNotes[note] && note) {
+    const key = document.querySelector(`[data-note="${note}"]`);
+    key.classList.add("active");
+    play(currentInstrument, note);
+  }
+});
+
+document.addEventListener("keyup", (ev) => {
+  const id = `key${ev.key}`;
+  const note = NOTES[id];
+  if (playingNotes[note] && note) {
+    const key = document.querySelector(`[data-note="${note}"]`);
+    key.classList.remove("active");
+    stop(note);
+  }
+});
+
+const toneSliders = document.querySelectorAll(".tone input");
+toneSliders.forEach(input => {
+  input.addEventListener("click", () => {
+    const instrument = input.id;
+    currentInstrument = String(instrument);
+  });
+});
+
+const volumeSliders = document.querySelectorAll(".volume input");
+volumeSliders.forEach(input => {
+  input.addEventListener("click", () => {
+    const volume = input.value;
+    currentVolume = Number(volume);
+  });
+});
+
+// Thanos egg easter
+const COLORS = ["#d81313", "#eace17", "#33ea12", "#12eae3", "#101eea", "#ea10e3"];
+
+const changeColor = () => {
+  setTimeout(() => {
+    const color = COLORS[~~(Math.random() * COLORS.length)];
+    document.body.classList.remove("dark");
+    document.body.style.setProperty("--body-color", color);
+    if (thanosMode) { setTimeout(() => changeColor(), 350); }
+  }, 350);
+};
+
+const disableThanosMode = () => {
+  document.body.classList.remove(...["dark", "party"]);
+  const thanosImage = document.querySelector(".thanos");
+  thanosImage && thanosImage.remove();
+  thanosMode = false;
+  cumbiaSong.pause();
+};
+
+const enableThanosMode = () => {
+  thanosMode = true;
+  cumbiaSong.currentTime = 0;
+  cumbiaSong.play();
+  document.body.classList.add("dark");
+
+  // Thanos image add
+  setTimeout(() => {
+    const image = document.createElement("img");
+    image.src = "https://manzdev.github.io/twitch-casio-pt1/thanos.png";
+    image.className = "thanos";
+    document.body.appendChild(image);
+  }, 18000);
+
+  // Party mode
+  setTimeout(() => {
+    document.body.classList.add("party");
+    changeColor();
+  }, 27000);
+};
+
+const demoButton = document.querySelector("[data-type=demo");
+demoButton.addEventListener("click", () => {
+  if (cumbiaSong.paused) { enableThanosMode(); } else { disableThanosMode(); }
+});
+</script>
+    </body>
+</html>
+
+

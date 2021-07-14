@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block head %}
+  <link href="{% static 'css/articles.css' %}" rel="stylesheet">
+  <script src="{% static 'js/articles.js' %}"></script>
+
+     <script>
+        $(document).ready(function() {
+            $("img").css({"height": "100px", "width": "120px"});
+
+            // Change background image of a div by clicking on the button
+            $("button").click(function() {
+                var imageUrl =
+"https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner-768x256.png";
+                $(".box").css("background-image", "url(" + imageUrl + ")");
+            });
+        });
+    </script>
+{% endblock head %}
+
+{% block main %}
+  <ol class="breadcrumb">
+    <li><a href="{% url 'articles' %}">{% trans 'Articles' %}</a></li>
+    <li class="active">{% trans 'Article' %}</li>
+  </ol>
+  {% include 'articles/partial_article.html' with article=article %}
+  {% include 'articles/partial_article_comments.html' with article=article %}
+{% endblock main %}
