@@ -5,6 +5,8 @@ from django.conf.urls import  include, url
 from . import views
 
 urlpatterns = [
+
+    url(r'^qnotes/$', views.qnotes, name='qnotes'),
     url(r'^$', views.articles, name='articles'),
     url(r'^firechat/$', views.firechat, name='firechat'),
     url(r'^addy/$', views.addIndex, name='addy'),

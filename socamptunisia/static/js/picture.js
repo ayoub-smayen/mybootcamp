@@ -1,11 +1,13 @@
-$(function () {
 
+
+$(document).ready(function () {
+alert("uploaded");
   var jcrop_api,
       boundx,
       boundy,
       xsize = 200,
       ysize = 200;
-  
+
   $("#crop-picture").Jcrop({
     aspectRatio: xsize / ysize,
     onSelect: updateCoords,
@@ -25,6 +27,7 @@ $(function () {
   };
 
   $("#btn-upload-picture").click(function () {
+      alert("ok");
     $("#picture-upload-form input[name='picture']").click();
   });
 

@@ -4,12 +4,13 @@ from django.contrib.auth.models import User
 from activities.models import Activity
 from django.utils.html import escape
 import bleach
-
+from ckeditor.fields import RichTextField
 
 class Feed(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    post = models.TextField(max_length=255)
+    post = RichTextField(blank=True,null=True)
+    #models.TextField(max_length=5000)
     parent = models.ForeignKey('Feed', null=True, blank=True,on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)

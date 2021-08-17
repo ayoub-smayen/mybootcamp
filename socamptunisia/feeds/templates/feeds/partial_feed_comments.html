@@ -10,13 +10,13 @@
       <img src="{{ comment.user.profile.profile_image.url }}" class="user-comment">
     </a>
     <h4>
-      <a href="{% url 'profile' comment.user.username %}">
+      <a href="{% url 'profile' comment.user.username %}" style="color:purple">
         {{ comment.user.profile.get_screen_name }}
       </a>
-      <small>{{ comment.date|naturaltime }}</small>
+      <small style="color:purple">{{ comment.date|naturaltime }}</small>
     </h4>
     <div>{{ comment.linkfy_post|safe }}</div>
   </li>
 {% empty %}
-  <li class="empty">{% trans 'Be the first one to comment' %}</li>
+  <li class="empty" style="color:purple">{% trans 'Be the first one to comment' %}</li>
 {% endfor %}

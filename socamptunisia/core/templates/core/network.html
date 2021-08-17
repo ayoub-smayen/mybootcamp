@@ -19,7 +19,14 @@
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <img src="{{ user.profile.get_picture }}" style="width:20px">
+
+                 {% if user.profile.profile_image %}
+           <img src="{{user.profile.profile_image.url}}" class="rounded float-right" height="85px" width="85px" style="border-radius:85%">
+
+           {% else %}
+           <img src="{% static 'user.png'%}" style="width:20px;border-radius:85%">
+           {%  endif %}
+
               <a href="{% url 'profile' user.username %}">{{ user.profile.get_screen_name }}</a>
             </div>
             <div class="panel-body">
@@ -31,7 +38,14 @@
                 <p><strong>{% trans 'Location' %}:</strong> {{ user.profile.location }}</p>
               {% endif %}
               {% if user.profile.url %}
-                <p><strong>{% trans 'Url' %}:</strong> {{ user.profile.get_url }}</p>
+                <p><strong>{% trans 'Url' %}:</strong>
+
+                <a href="{{ user.profile.get_url }}" target="_blank">
+                      <i class="fa fa-link"></i>
+                </a>
+
+
+                </p>
               {% endif %}
             </div>
           </div>

@@ -31,12 +31,18 @@ from django.contrib.auth.views import LoginView, LogoutView
 from userprofile.views import HomeView, SignUpView, DashboardView, ProfileUpdateView, ProfileView
 
 urlpatterns = [
+     url(r'^admin/', admin.site.urls),
+     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('profile-update/', ProfileUpdateView.as_view(), name='profile-update'),
     path('profile/', ProfileView.as_view(), name='userprofile'),
     url(r'^$', core_views.home, name='home'),
-    #url(r'^$', include('core.urls')),
-    url(r'^login', auth_views.login, {'template_name': 'core/cover.html'},
+
+    path('posts/', include("posts1.urls")),
+     url(r'^login', LoginView.as_view(template_name= 'core/cover.html'),
         name='login'),
+    #url(r'^$', include('core.urls')),
+    #url(r'^$', include('core.urls')),
+    #url(r'^login', auth_views.login, {'template_name': 'core/cover.html'}, name='login'),
         url(r'^logout', LogoutView.as_view(), name='logout'),
     #url(r'^logout', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^signup/$', bootcamp_auth_views.signup, name='signup'),
@@ -61,8 +67,7 @@ urlpatterns = [
     url(r'^search/$', search_views.search, name='search'),
     url(r'^(?P<username>[^/]+)/$', core_views.profile, name='profile'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+
 ]
 
-urlpatterns += [
-    path('admin/', admin.site.urls),
-]
+

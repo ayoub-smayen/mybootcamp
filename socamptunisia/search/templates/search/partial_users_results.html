@@ -6,7 +6,7 @@
     {% for user_result in results %}
       <li username="{{ user.username }}">
         <h5>
-          <img src="{{ user_result.profile.get_picture }}" class="result-user">
+          <img src="{{user_result.profile.profile_image.url}}" class="result-user">
           <a href="{% url 'profile' user_result.username %}">
             {{ user_result.profile.get_screen_name }}
             <small>({{ user_result.username }})</small>

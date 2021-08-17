@@ -7,7 +7,9 @@
 {% endblock head %}
 
 {% block body %}
-  <h1 class="logo"><a href="{% url 'home' %}">socamptunisia</a></h1>
+  <h1 class="logo"><a href="{% url 'home' %}">
+      <img  src="{% static 'img/tn-logo.PNG' %}" height="85" width="100" />
+  </a></h1>
   <div class="signup">
     <h2>{% trans 'Sign up for socamptunisia' %}</h2>
     <form action="{% url 'signup' %}" method="post" role="form">

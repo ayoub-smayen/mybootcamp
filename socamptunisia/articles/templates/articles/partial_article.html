@@ -8,10 +8,12 @@
   <h2 ><a href="{% url 'article' article.slug %}">
       <span class="badge badge-primary">
           {% if article.title|length <= 100  %}
-           {{ article.title |safe }}
+           {{ article.title}}
            {% else%}
            trop long {{ article.title |length }}...
-            {{ article.title|safe }}
+           {% autoescape off %}
+            {{ article.title   }}
+            {% endautoescape %}
            {%endif%}
       </span>
 
@@ -23,7 +25,15 @@
       {{ article.create_date }}
     </span>
     <span class="user">
-      <a href="{% url 'profile' article.create_user.username %}"><img src="{{ article.create_user.profile.get_picture }}"></a>
+      <a href="{% url 'profile' article.create_user.username %}">
+          {% if user.profile.profile_image.url %}
+           <img src="{{user.profile.profile_image.url}}" class="rounded">
+
+           {%else%}
+            <img src="{{ article.create_user.profile.get_picture }}">
+           {%  endif %}
+
+          </a>
       <a href="{% url 'profile' article.create_user.username %}">{{ article.create_user.profile.get_screen_name }}</a>
     </span>
     <span class="comments">
@@ -31,10 +41,16 @@
       {{ article.get_comments.count }} Comments
     </span>
   </div>
-  <div class="content jumbotron">
-    <div class="row justify-content-center">
-        <div class="col col-sm-6" height="120px" width="150px">
+  <div class="content">
+    <div class="row" height="780px" width="100%">
+        <div class="col col-sm-6 ">
+{% if article.get_content_as_markdown|length <= 170  %}
     {{ article.get_content_as_markdown|safe }}
+    {%else%}
+    <details>
+        {{ article.get_content_as_markdown|safe }}
+    </details>
+    {%endif%}
         </div>
     </div>
 

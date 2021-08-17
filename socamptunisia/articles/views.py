@@ -11,6 +11,8 @@ from django.template.loader import render_to_string
 
 def savenotes(req):
     return render(req,"articles/savenotes.html")
+def qnotes(req):
+    return render(req,"base1.html")
 
 
 def addNotes(req):

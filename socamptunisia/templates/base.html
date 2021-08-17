@@ -4,146 +4,37 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>{% block title %}socamptunisia{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
-
-     <link rel = "icon" href =
-"https://www.graphicsprings.com/filestorage/stencils/80743ff34ea418197d633bc658fe405c.svg"
+    <title>{% block title %}Tunicamp{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{% static 'img/tn-logo.PNG' %}">
+         <link rel = "icon" href =
+"{% static 'img/tn-logo.PNG' %}"
         type = "image/x-icon">
-
-
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{% static 'css/bootcamp.css' %}?v=1" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--[if lt IE 9]>
-           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-    crossorigin="anonymous" />
-  <style>
-        .box {
-            width: 700px;
-            height: 220px;
-            border: 2px solid black;
-            background-repeat: no-repeat;
-            background-image: url(
-"https://www.geeksforgeeks.org/wp-content/uploads/javascript-768x256.png");
-        }
-        h1{
-            color:green;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <!-- Marked library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.2.2/marked.min.js"></script>
+    <script src="{% static 'js/bootcamp.js' %}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <style>
 
-details {
-	 margin: 1rem auto;
-	 padding: 0 1rem;
-	 width: 35em;
-	 max-width: calc(100% - 2rem);
-	 position: relative;
-	 border: 1px solid #78909c;
-	 border-radius: 6px;
-	 background-color: #eceff1;
-	 color: #263238;
-	 transition: background-color 0.15s;
-}
- details > :last-child {
-	 margin-bottom: 1rem;
-}
- details::before {
-	 width: 100%;
-	 height: 100%;
-	 content: '';
-	 position: absolute;
-	 top: 0;
-	 left: 0;
-	 border-radius: inherit;
-	 opacity: 0.15;
-	 box-shadow: 0 0.25em 0.5em #263238;
-	 pointer-events: none;
-	 transition: opacity 0.2s;
-	 z-index: -1;
-}
- details[open] {
-	 background-color: #fff;
-}
- details[open]::before {
-	 opacity: 0.6;
-}
- summary {
-	 padding: 1rem 2em 1rem 0;
-	 display: block;
-	 position: relative;
-	 font-size: 1.33em;
-	 font-weight: bold;
-	 cursor: pointer;
-}
- summary::before, summary::after {
-	 width: 0.75em;
-	 height: 2px;
-	 position: absolute;
-	 top: 50%;
-	 right: 0;
-	 content: '';
-	 background-color: currentColor;
-	 text-align: right;
-	 transform: translateY(-50%);
-	 transition: transform 0.2s ease-in-out;
-}
- summary::after {
-	 transform: translateY(-50%) rotate(90deg);
-}
- [open] summary::after {
-	 transform: translateY(-50%) rotate(180deg);
-}
- summary::-webkit-details-marker {
-	 display: none;
-}
- p {
-	 margin: 0 0 1em;
-	 line-height: 1.5;
-}
- ul {
-	 margin: 0 0 1em;
-	 padding: 0 0 0 1em;
-}
- li:not(:last-child) {
-	 margin-bottom: 0.5em;
-}
- code {
-	 padding: 0.2em;
-	 border-radius: 3px;
-	 background-color: #e0e0e0;
-}
- pre > code {
-	 display: block;
-	 padding: 1em;
-	 margin: 0;
-}
+    div{
 
 
-     .talk-bubble {
-	margin: 40px;
-  display: inline-block;
-  position: relative;
-	width: 200px;
-	height: auto;
-	background-color: lightyellow;
-}
-.add {
+        text-shadow:1px 2px 3px purple;
+        color : gold;
+    }
+        .add {
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -212,401 +103,18 @@ details {
 
 }
 
-/* Right triangle placed top left flush. */
-.tri-right.border.left-top:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: -40px;
-	right: auto;
-  top: -8px;
-	bottom: auto;
-	border: 32px solid;
-	border-color: #666 transparent transparent transparent;
-}
-.tri-right.left-top:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: -20px;
-	right: auto;
-  top: 0px;
-	bottom: auto;
-	border: 22px solid;
-	border-color: lightyellow transparent transparent transparent;
-}
-
-/* Right triangle, left side slightly down */
-.tri-right.border.left-in:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: -40px;
-	right: auto;
-  top: 30px;
-	bottom: auto;
-	border: 20px solid;
-	border-color: #666 #666 transparent transparent;
-}
-.tri-right.left-in:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: -20px;
-	right: auto;
-  top: 38px;
-	bottom: auto;
-	border: 12px solid;
-	border-color: lightyellow lightyellow transparent transparent;
-}
-
-/*Right triangle, placed bottom left side slightly in*/
-.tri-right.border.btm-left:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	left: -8px;
-  right: auto;
-  top: auto;
-	bottom: -40px;
-	border: 32px solid;
-	border-color: transparent transparent transparent #666;
-}
-.tri-right.btm-left:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	left: 0px;
-  right: auto;
-  top: auto;
-	bottom: -20px;
-	border: 22px solid;
-	border-color: transparent transparent transparent lightyellow;
-}
-
-/*Right triangle, placed bottom left side slightly in*/
-.tri-right.border.btm-left-in:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	left: 30px;
-  right: auto;
-  top: auto;
-	bottom: -40px;
-	border: 20px solid;
-	border-color: #666 transparent transparent #666;
-}
-.tri-right.btm-left-in:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	left: 38px;
-  right: auto;
-  top: auto;
-	bottom: -20px;
-	border: 12px solid;
-	border-color: lightyellow transparent transparent lightyellow;
-}
-
-/*Right triangle, placed bottom right side slightly in*/
-.tri-right.border.btm-right-in:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: 30px;
-	bottom: -40px;
-	border: 20px solid;
-	border-color: #666 #666 transparent transparent;
-}
-.tri-right.btm-right-in:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: 38px;
-	bottom: -20px;
-	border: 12px solid;
-	border-color: lightyellow lightyellow transparent transparent;
-}
-/*
-	left: -8px;
-  right: auto;
-  top: auto;
-	bottom: -40px;
-	border: 32px solid;
-	border-color: transparent transparent transparent #666;
-	left: 0px;
-  right: auto;
-  top: auto;
-	bottom: -20px;
-	border: 22px solid;
-	border-color: transparent transparent transparent lightyellow;
-
-/*Right triangle, placed bottom right side slightly in*/
-.tri-right.border.btm-right:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: -8px;
-	bottom: -40px;
-	border: 20px solid;
-	border-color: #666 #666 transparent transparent;
-}
-.tri-right.btm-right:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: 0px;
-	bottom: -20px;
-	border: 12px solid;
-	border-color: lightyellow lightyellow transparent transparent;
-}
-
-/* Right triangle, right side slightly down*/
-.tri-right.border.right-in:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: -40px;
-  top: 30px;
-	bottom: auto;
-	border: 20px solid;
-	border-color: #666 transparent transparent #666;
-}
-.tri-right.right-in:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: -20px;
-  top: 38px;
-	bottom: auto;
-	border: 12px solid;
-	border-color: lightyellow transparent transparent lightyellow;
-}
-
-/* Right triangle placed top right flush. */
-.tri-right.border.right-top:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: -40px;
-  top: -8px;
-	bottom: auto;
-	border: 32px solid;
-	border-color: #666 transparent transparent transparent;
-}
-.tri-right.right-top:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: -20px;
-  top: 0px;
-	bottom: auto;
-	border: 20px solid;
-	border-color: lightyellow transparent transparent transparent;
-}
-
-/* talk bubble contents */
-.talktext{
-  padding: 1em;
-	text-align: left;
-  line-height: 1.5em;
-}
-.talktext p{
-  /* remove webkit p margins */
-  -webkit-margin-before: 0em;
-  -webkit-margin-after: 0em;
-}
-
-        @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
-
-
-
-
-#push-notification {
-  position: relative;
-  height: 100vh;
-}
-
-.notification {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  width: 30%;
-  background: #FFF;
-  -webkit-box-shadow: 0 10px 6px -6px #d8d8d8;
-	-moz-box-shadow: 0 10px 6px -6px #d8d8d8;
-	box-shadow: 0 10px 6px -6px #d8d8d8;
-  border-radius: 10px;
-  overflow: hidden;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.5s all;
-}
-
-.media {
-  width: 80px;
-  height: 70px;
-  margin-right: 1rem;
-}
-
-.media img {
-  width: 100%;
-  height: 100%;
-}
-
-.title h3 {
-  font-weight: normal;
-  font-size: 100%;
-  letter-spacing: 1px;
-  word-spacing: 1px;
-}
-
-.content {
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  right: 2%;
-  top: auto;
-  bottom: auto;
-  font-size: 140%;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-
-.avatar-wrapper{
-	position: relative;
-	height: 200px;
-	width: 200px;
-	margin: 50px auto;
-	border-radius: 50%;
-	overflow: hidden;
-	box-shadow: 1px 1px 15px -5px black;
-	transition: all .3s ease;
-	&:hover{
-		transform: scale(1.05);
-		cursor: pointer;
-	}
-	&:hover .profile-pic{
-		opacity: .5;
-	}
-	.profile-pic {
-    height: 100%;
-		width: 100%;
-		transition: all .3s ease;
-		&:after{
-			font-family: FontAwesome;
-			content: "\f007";
-			top: 0; left: 0;
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			font-size: 190px;
-			background: #ecf0f1;
-			color: #34495e;
-			text-align: center;
-		}
-	}
-	.upload-button {
-		position: absolute;
-		top: 0; left: 0;
-		height: 100%;
-		width: 100%;
-		.fa-arrow-circle-up{
-			position: absolute;
-			font-size: 234px;
-			top: -17px;
-			left: 0;
-			text-align: center;
-			opacity: 0;
-			transition: all .3s ease;
-			color: #34495e;
-		}
-		&:hover .fa-arrow-circle-up{
-			opacity: .9;
-		}
-	}
-}
     </style>
-
-
-
-<script>
-$(document).ready(function(){
-  $("#pintagone").click(function(){
-    $(this).hide();
-  });
-});
-</script>
-    <script src="{% static 'js/bootcamp.js' %}"></script>
     {% block head %}{% endblock %}
   </head>
   <body>
     {% block body %}
 
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
-</script>
 
 
 
 
-
-
-  <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-large"
-  onclick="w3_close()">Close &times;</button>
-   <button class="add" id="add">
-    <i class="fas fa-plus"></i> Add note
-  </button>
-
-
-</div>
-
-
-
+<!-- Page Content -->
 
 
 
@@ -614,76 +122,57 @@ function w3_close() {
 
       <header>
 
-
-
-
-
-
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background:purple">
-              <button class="js__dark-mode-toggle dark-mode-toggle" type="button">
+          <div class="container">
+            <div class="navbar-header">
+                  <button class="js__dark-mode-toggle dark-mode-toggle" type="button">
               <span class="dark-mode-toggle__icon"></span>
               <span class="dark-mode-toggle__text hidden--visually">dark mode</span>
              </button>
-          <div class="container">
-            <div class="navbar-header">
-
-
-
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                <span class="sr-only">  <h1 class="text text-primary" style="text-shadow:1px 1px 0 #444"> topTalk0</h1></span>
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+ <a class="navbar-brand" href="{% url 'home' %}">
+
+                  <span class="w3-text-orange" style="text-shadow:1px 1px 0 #444">socialcamp-Tn
 
 
+                 <img src="https://www.graphicsprings.com/filestorage/stencils/80743ff34ea418197d633bc658fe405c.svg" height="80" width="80"  />
+              </span>
+              </a>
 
-              <a class="navbar-brand" href="{% url 'home' %}">
-                         <i class="fa fa-home"></i>
-
-
+            <canvas id="canvas" width="80" height="80"
+style="background-color:#333">
+</canvas>
 
 
             </div>
             <div class="collapse navbar-collapse" id="menu">
               <ul class="nav navbar-nav">
+
                 <li>
                   <a href="#" id="notifications" data-container="body" data-toggle="popover" data-placement="bottom" title="Notifications">
                     <span class="glyphicon glyphicon-bell"></span>
                   </a>
                 </li>
+                <li><a href="{% url 'feeds' %}">{% trans 'Feed' %}</a></li>
+                <li><a href="{% url 'articles' %}">{% trans 'Articles' %}</a></li>
+                <li><a href="{% url 'questions' %}">{% trans 'Q&A' %}</a></li>
+                <li><a href="{% url 'network' %}">{% trans 'Network' %}</a></li>
+                 <li><a href="{% url 'posts1:add-post' %}">{% trans 'Create post' %} </a></li>
 
-
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'userprofile' %}">
-          <i class="fas fa-fw fa-user"></i>
-          <span>MyProfile
-          {% if user.profile.profile_image.url %}
-           <img src="{{user.profile.profile_image.url}}" class="rounded float-right" height="85px" width="85px">
-           {%  endif %}
-          </span></a>
-      </li>
-      <li><a href="{% url 'savenotes' %}">{% trans 'savenotes' %}</a></li>
+                 <li><a href="{% url 'savenotes' %}">{% trans 'savenotes' %}</a></li>
         <li>  <a   target="_blank" class="navbar-brand" href="http://appchat258.pythonanywhere.com/login?next=%2Fprofile" >
                          <i class="fa fa-smile"></i>
 
 
 
               </a></li>
+               <li><a href="http://videotube1.pythonanywhere.com/" target="_blank">{% trans 'sharevideo' %}</a></li>
 
-                <li><a href="{% url 'feeds' %}">{% trans 'Feed' %}</a></li>
-                <li><a href="{% url 'articles' %}">{% trans 'Articles' %}</a></li>
-                <li><a href="{% url 'questions' %}">{% trans 'Q&A' %}</a></li>
-                <li><a href="{% url 'network' %}">{% trans 'Network' %}</a></li>
-                <li><a href="{% url 'myeditor' %}" target="_blank">{% trans 'myeditor' %}</a></li>
-                  <li><a href="{% url 'firechat' %}" target="_blank">{% trans 'firechat' %}</a></li>
-</a>
-             <li>  <a class="navbar-brand" href="{% url 'addNotes' %}" target="_blank">
-                         <i class="fa fa-pencil"></i>
-
-
-
-              </a></li>
               </ul>
               {% if not hide_search %}
                 <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
@@ -697,173 +186,205 @@ function w3_close() {
               {% endif %}
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="{% url 'profile' user.username %}">{{ user.profile.get_screen_name }}</a>
+                  <a href="{% url 'profile' user.username %}">{{ user.profile.get_screen_name }}
+                   {% if user.profile.profile_image.url %}
+           <img src="{{user.profile.profile_image.url}}" class="rounded float-right" height="85px" width="85px" style="border-radius:85%">
+           {% else %}
+             <img src="{{ user.profile.get_picture }}" class="user" height="85" width="85" style="border-radius:85%">
+           {%  endif %}
+                  </a>
                 </li>
+
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="{% url 'inbox' %}"><span class="badge pull-right" id="unread-count">0</span> Inbox</a></li>
                     <li><a href="{% url 'settings' %}">{% trans 'Account Settings' %}</a></li>
                     <li class="divider"></li>
-                    <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
-                    <li><a href="http://videotube1.pythonanywhere.com/" target="_blank">{% trans 'sharevideo' %}</a></li>
-                     <a href="" class="w3-bar-item w3-button">
-      <i class="fa fa-home">
+                     <li><a href="{% url 'posts1:display-posts' %}">{% trans 'Posts' %}</a></li>
+
+                     <li><a href="{% url 'qnotes' %}">{% trans ' qnotes' %}</a></li>
+                   <li> <a href="{% url 'addy' %}" class="w3-bar-item w3-button" target="_blank">addy</a></li>
+                <li> <a href="{% url 'lochatty' %}" class="w3-bar-item w3-button" target="_blank">lochatty</a></li>
+                 <li><a href="{% url 'myeditor' %}" target="_blank">{% trans 'myeditor' %}</a></li>
+                  <li><a href="{% url 'firechat' %}" target="_blank">{% trans 'firechat' %}</a></li>
+</a>
+             <li>  <a class="navbar-brand" href="{% url 'addNotes' %}" target="_blank">
+                         <i class="fa fa-pencil"></i>
 
 
-      </i>
-  </a>
-    <a class="w3-bar-item w3-button" href="{% url 'feeds' %}">{% trans 'Feed' %}</a>
-    <li><a href="{% url 'firechat' %}" target="_blank">{% trans 'firechat' %}</a></li>
-                <a class="w3-bar-item w3-button" href="{% url 'articles' %}">{% trans 'Articles' %}</a>
-                <a class="w3-bar-item w3-button" href="{% url 'questions' %}">{% trans 'Q&A' %}</a>
-                <a class="w3-bar-item w3-button" href="{% url 'network' %}">{% trans 'Network' %}</a>
-                 <a href="{% url 'addy' %}" class="w3-bar-item w3-button" target="_blank">addy</a>
-                 <a href="{% url 'lochatty' %}" class="w3-bar-item w3-button" target="_blank">lochatty</a>
+
+              </a></li>
 
 
-                 <a class="w3-bar-item w3-button" href="{% url 'piano1' %}" target="_blank">{% trans 'piano1' %}</a>
-                <a class="w3-bar-item w3-button" href="{% url 'piano2' %}" target="_blank">{% trans 'piano2' %}</a>
-                 <a href="{% url 'rubikGame' %}" class="w3-bar-item w3-button" target="_blank">cube game</a>
-                 <a href="{% url 'mainCraft' %}" class="w3-bar-item w3-button" target="_blank">craftgame</a>
-  <a href="#" >lochatty
-  <img src="{{ user.profile.get_picture }}" class="user">
-  </a>
-<button class="add" id="add">
-    <i class="fas fa-plus"></i> Add note
-  </button>
-
-
+                 <li><a class="w3-bar-item w3-button" href="{% url 'piano1' %}" target="_blank">{% trans 'piano1' %}</a></li>
+                <li><a class="w3-bar-item w3-button" href="{% url 'piano2' %}" target="_blank">{% trans 'piano2' %}</a></li>
+                 <li><a href="{% url 'rubikGame' %}" class="w3-bar-item w3-button" target="_blank">cube game</a></li>
+                 <li><a href="{% url 'mainCraft' %}" class="w3-bar-item w3-button" target="_blank">craftgame</a></li>
+                                 <li>
+        <a href="{% url 'userprofile' %}">
+          <i class="fa fa-user"></i>
+          <span>MyProfile
+          {% if user.profile.profile_image.url %}
+           <img src="{{user.profile.profile_image.url}}" class="rounded float-right" height="85px" width="85px">
+           {%  endif %}
+          </span></a>
+      </li>
+                  <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-
-
-
-
       </header>
-
-
-
-
-
       <main>
-
+          <br/>
+          <br/>
+           <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
         <div class="container">
-
-
-
+            <div class="jumbotron">
           {% block main %}
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-
-
-
-<br/>
-<br/>
-<br/>
-<br/>
-          <h1>enjoy</h1>
           {% endblock main %}
-            <div class="w3-teal">
-        </div>
+          </div>
         </div>
       </main>
-      <div id="main">
- <div id="txt"></div>
-<h2>   </h2>
-             <?php
-$date=date_create();
-echo date_timestamp_get($date);
-?>
-<h1>notification</h1>
-<div id="push-notification">
-  <!-- Notification 2 -->
-  <article class="notification" data-id="0">
-    <figure class="media">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Mountain_view_from_Jiri%2C_Nepal.jpg/271px-Mountain_view_from_Jiri%2C_Nepal.jpg" alt="">
-    </figure>
-    <div class="content">
-      <div class="title">
-        <h3>The Ten Reasons To Love Nepal.</h3>
-      </div>
-    </div>
-    <span class="close">&times;</span>
-  </article>
-<!-- Notification 2 -->
-  <article class="notification" data-id="1">
-    <figure class="media">
-      <img src="http://photos.wikimapia.org/p/00/00/57/85/28_big.jpg" alt="">
-    </figure>
-    <div class="content">
-      <div class="title">
-        <h3>The History of Nepal.</h3>
-      </div>
-    </div>
-    <span class="close">&times;</span>
-  </article>
-<!-- Notification 3 -->
-  <article class="notification" data-id="2">
-    <figure class="media">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Namche_Bazaar_Nepal.jpg/220px-Namche_Bazaar_Nepal.jpg" alt="">
-    </figure>
-    <div class="content">
-      <div class="title">
-        <h3>Seven Secrets About Nepal.</h3>
-      </div>
-    </div>
-    <span class="close">&times;</span>
-  </article>
-</div>
 
-<img src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg" alt="Car" style="width:50%" height="120">
 
-<div class="w3-container">
-<i class="fa fa-list-alt" style="font-size:48px;color:red"></i>
-<p>
-
-</p>
-
-<button onclick="typeWriter()">writer
- <i class="fa fa-hand">
-
- </i>
-</button>
 
 <p id="demo"></p>
 
-</div>
 
 
 
+<!--
+<button onclick="typeWriter()">
+ <i class="fa fa-hand">
 
-</div>
+ </i>
+</button>-->
+<button class="add" id="add">
+    <i class="fas fa-plus"></i> Add note
+  </button>
+      <script src="{% static 'js/notifications.js' %}"></script>
+      <script src="{% static 'js/check_messages.js' %}"></script>
+    {% endblock body %}
+    <script src="{% static 'js/ga.js' %}"></script>
+    <script>
+    const addBtn = document.getElementById("add")
 
+// pull these from local storage
+const notes = JSON.parse(localStorage.getItem("notes"))
 
-<div class="jumbotron">
-<canvas id="canvas" width="400" height="400"
-style="background-color:#333">
-</canvas>
+if (notes) {
+  notes.forEach((note) => addNewNote(note))
+}
 
+addBtn.addEventListener("click", () => addNewNote())
 
-</div>
+function addNewNote(text = "") {
+  const note = document.createElement("div")
+  note.classList.add("note")
 
+  note.innerHTML = `
+    <div class="tools">
+        <button class="edit"><i class="fas fa-edit"></i></button>
+        <button class="delete"><i class="fas fa-trash-alt"></i></button>
+    </div>
 
-<div class="avatar-wrapper">
-	<img class="profile-pic" src="" />
-	<div class="upload-button">
-		<i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
-	</div>
-	<input class="file-upload" type="file" accept="image/*"/>
-</div>
+    <div class="main ${text ? "" : "hidden"}"></div>
+    <textarea class="${text ? "hidden" : ""}"></textarea>
+    `
+
+  const editBtn = note.querySelector(".edit")
+  const deleteBtn = note.querySelector(".delete")
+  const main = note.querySelector(".main")
+  const textArea = note.querySelector("textarea")
+
+  textArea.value = text
+  // Using the marked library for markdown
+  main.innerHTML = marked(text)
+
+  deleteBtn.addEventListener("click", () => {
+    note.remove()
+
+    updateLS()
+  })
+
+  editBtn.addEventListener("click", () => {
+    main.classList.toggle("hidden")
+    textArea.classList.toggle("hidden")
+  })
+
+  textArea.addEventListener("input", (e) => {
+    const { value } = e.target
+
+    main.innerHTML = marked(value)
+
+    updateLS()
+  })
+
+  document.body.appendChild(note)
+}
+
+function updateLS() {
+  const notesText = document.querySelectorAll("textarea")
+
+  const notes = []
+
+  notesText.forEach((note) => notes.push(note.value))
+
+  localStorage.setItem("notes", JSON.stringify(notes))
+}
+
+</script>
+    <script>
+          const setDarkMode = (active = false) => {
+    const wrapper = document.querySelector(":root");
+    if (active) {
+        wrapper.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+    } else {
+        wrapper.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+    }
+};
+
+const toggleDarkMode = () => {
+    const theme = document.querySelector(":root").getAttribute("data-theme");
+    // If the current theme is "light", we want to activate dark
+    setDarkMode(theme === "light");
+};
+
+const initDarkMode = () => {
+    const query = window.matchMedia("(prefers-color-scheme: dark)");
+    const themePreference = localStorage.getItem("theme");
+
+    let active = query.matches;
+    if (themePreference === "dark") {
+        active = true;
+    }
+    if (themePreference === "light") {
+        active = false;
+    }
+
+    setDarkMode(active);
+
+    query.addListener(e => setDarkMode(e.matches));
+
+    const toggleButton = document.querySelector(".js__dark-mode-toggle");
+    toggleButton.addEventListener("click", toggleDarkMode);
+};
+
+initDarkMode();
+</script>
 <script>
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -946,211 +467,31 @@ function drawHand(ctx, pos, length, width) {
 }
 </script>
 
-       <div class="w3-panel w3-blue">
-                     <div id="txt"></div>
-
-
-                     </div>
-                     <script>
-function startTime() {
-  const today = new Date();
-  let h = today.getHours();
-  let m = today.getMinutes();
-  let s = today.getSeconds();
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
-  setTimeout(startTime, 1000);
-}
-
-function checkTime(i) {
-  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-  return i;
-}
-</script>
-      <script src="{% static 'js/notifications.js' %}"></script>
-      <script src="{% static 'js/check_messages.js' %}"></script>
-    {% endblock body %}
-    <script src="{% static 'js/ga.js' %}"></script>
 
 <script>
-var i = 0;
-var txt = 'hello  all  body  write and  share your opinion here';
-var speed = 50;
-
-function typeWriter() {
-  if (i < txt.length) {
-    document.getElementById("demo").innerHTML += txt.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
-  }
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
 }
 </script>
-
 <script>
-          const setDarkMode = (active = false) => {
-    const wrapper = document.querySelector(":root");
-    if (active) {
-        wrapper.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-    } else {
-        wrapper.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-    }
-};
-
-const toggleDarkMode = () => {
-    const theme = document.querySelector(":root").getAttribute("data-theme");
-    // If the current theme is "light", we want to activate dark
-    setDarkMode(theme === "light");
-};
-
-const initDarkMode = () => {
-    const query = window.matchMedia("(prefers-color-scheme: dark)");
-    const themePreference = localStorage.getItem("theme");
-
-    let active = query.matches;
-    if (themePreference === "dark") {
-        active = true;
-    }
-    if (themePreference === "light") {
-        active = false;
-    }
-
-    setDarkMode(active);
-
-    query.addListener(e => setDarkMode(e.matches));
-
-    const toggleButton = document.querySelector(".js__dark-mode-toggle");
-    toggleButton.addEventListener("click", toggleDarkMode);
-};
-
-initDarkMode();
-</script>
-
-<script>
-    // SIMPLE PUSH NOTIFICATION CONCEPT IN PURE JAVASCRIPT
-
-// counter
-let counter = 0;
-
-// creates infinite loop
-setInterval(function() {
-// select all notification with dynamic dataset value
-  let notification = document.querySelector('article[data-id="' + counter +'"]');
-  // make notification visible
-    notification.style.visibility = 'visible';
-  // sets opacity to 1 for fade effect
-    notification.style.opacity = 1;
-  // increase counter
-    counter++;
-  // simple counter reset condition when max notification count is reached ex: 3 in our program
-  if(counter === 3) {
-    counter = 0;
-  }
-  // timeout on every notification to hide them once visible to create hide show effect
-  setTimeout(function() {
-    notification.style.visibility = 'hidden';
-    notification.style.opacity = 0;
-  }, 1000);
-}, 3000);
-
-// adjust interval according to your needs.
-</script>
-
-
-<script>
-    $(document).ready(function() {
-
-    var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.profile-pic').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $(".file-upload").on('change', function(){
-        readURL(this);
-    });
-
-    $(".upload-button").on('click', function() {
-       $(".file-upload").click();
-    });
-});
-</script>
-
-<script>
-    const addBtn = document.getElementById("add")
-
-// pull these from local storage
-const notes = JSON.parse(localStorage.getItem("notes"))
-
-if (notes) {
-  notes.forEach((note) => addNewNote(note))
+function w3_open() {
+  document.getElementById("mySidebar").style.width = "100%";
+  document.getElementById("mySidebar").style.display = "block";
 }
 
-addBtn.addEventListener("click", () => addNewNote())
-
-function addNewNote(text = "") {
-  const note = document.createElement("div")
-  note.classList.add("note")
-
-  note.innerHTML = `
-    <div class="tools">
-        <button class="edit"><i class="fas fa-edit"></i></button>
-        <button class="delete"><i class="fas fa-trash-alt"></i></button>
-    </div>
-
-    <div class="main ${text ? "" : "hidden"}"></div>
-    <textarea class="${text ? "hidden" : ""}"></textarea>
-    `
-
-  const editBtn = note.querySelector(".edit")
-  const deleteBtn = note.querySelector(".delete")
-  const main = note.querySelector(".main")
-  const textArea = note.querySelector("textarea")
-
-  textArea.value = text
-  // Using the marked library for markdown
-  main.innerHTML = marked(text)
-
-  deleteBtn.addEventListener("click", () => {
-    note.remove()
-
-    updateLS()
-  })
-
-  editBtn.addEventListener("click", () => {
-    main.classList.toggle("hidden")
-    textArea.classList.toggle("hidden")
-  })
-
-  textArea.addEventListener("input", (e) => {
-    const { value } = e.target
-
-    main.innerHTML = marked(value)
-
-    updateLS()
-  })
-
-  document.body.appendChild(note)
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
 }
-
-function updateLS() {
-  const notesText = document.querySelectorAll("textarea")
-
-  const notes = []
-
-  notesText.forEach((note) => notes.push(note.value))
-
-  localStorage.setItem("notes", JSON.stringify(notes))
-}
-
 </script>
+<script src="https:////cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+
   </body>
 </html>

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/display_posts.css' %}">
+{% endblock %}
+{% block main %}
+
+
+<div class="container">
+
+
+<h1>All Posts</h1>
+
+{% for post, liked, like_no in master %}
+
+  <div class="card" style="width:400px">
+    <img class="card-img-top" src="{{post.user.profile.profile_image.url}}" alt="Card image" style="width:100%;border-radius:85%" >
+    <div class="card-body">
+           <div class="display-posts ">
+	<a href="{% url 'posts1:detail-post' pk=post.pk %}"><h3>{{ post.title|title }}</h3></a>
+	<p>Created : {{ post.created }}</p>
+	<p>Updated : {{ post.updated }}</p>
+	<p>By : <a href="{% url 'profile' post.user.username %}">{{ post.user }}</a></p>
+	{% if post.img %}
+		<img src="{{post.img.url}}">
+	{% endif %}
+	<p class="description">{{ post.description|safe|truncatewords:20 }}</p>
+<!--	{ % include "accounts/likes_logic.html" % }-->
+
+
+
+
+
+	<br>
+</div>
+    </div>
+  </div>
+  <br>
+
+
+  <div class="card" style="width:400px">
+    <div class="card-body">
+      {% if liked %}
+	<form method="POST" action="{% url 'posts1:like' pk=post.pk destination='detail' %}">
+	{% csrf_token %}
+	<button type="submit" name="next" value="{{ request.path }}"><span class="count">{{like_no}}</span><i class="fa fa-thumbs-up post-icon"></button></i>
+	</form>
+	<!-- </a> -->
+{% else %}
+	<form method="POST" action="{% url 'posts1:like' pk=post.pk destination='detail' %}">
+	{% csrf_token %}
+	<button type="submit" name="next" value="{{ request.path }}"><span class="count">{{like_no}}</span><i class="fa fa-thumbs-up post-icon"></button></i>
+	</form>
+{% endif %}
+<a href="{% url 'posts1:add-comment' pk=post.pk %}">
+	<button><span class="count">{{post.num_comments}}</span><i class="fa fa-comments post-icon"></i></button>
+</a>
+
+    </div>
+
+  </div>
+
+
+	<br>
+</div>
+
+</div>
+
+
+{% endfor %}
+</div>
+{% endblock %}

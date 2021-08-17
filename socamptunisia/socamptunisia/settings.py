@@ -52,8 +52,11 @@ INSTALLED_APPS = [
     'questions',
     'search',
      'userprofile',
+     'ckeditor',
+    'ckeditor_uploader',
+    'posts1',
 ]
-
+CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -162,6 +165,17 @@ LANGUAGES = (
     ('es', 'Spanish')
 )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'images'
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 #FILE_UPLOAD_TEMP_DIR = '/tmp/'
 #FILE_UPLOAD_PERMISSIONS = 0644
